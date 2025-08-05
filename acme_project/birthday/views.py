@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -12,17 +13,30 @@ class BirthdayListView(ListView):
     ordering = 'id'
     paginate_by = 10
 
-class BirthdayCreateView(CreateView):
+class BirthdayCreateView(UserPassesTestMixin, CreateView):
     model = Birthday
     form_class = BirthdayForm
 
-class BirthdayUpdateView(UpdateView):
+    def test_func(self):
+        object = self.get_object()
+        return object.author == self.request.user 
+
+class BirthdayUpdateView(UserPassesTestMixin, UpdateView):
     model = Birthday
     form_class = BirthdayForm
 
-class BirthdayDeleteView(DeleteView):
+    def test_func(self):
+        object = self.get_object()
+        return object.author == self.request.user 
+
+
+class BirthdayDeleteView(UserPassesTestMixin, DeleteView):
     model = Birthday
     success_url = reverse_lazy('birthday:list')
+    def test_func(self):
+        object = self.get_object()
+        return object.author == self.request.user 
+
 
 class BirthdayDetailView(DetailView):
     model = Birthday

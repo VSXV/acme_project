@@ -3,4 +3,4 @@ from django.db import models
 
 
 class CustomUser(AbstractUser):
-    birthday = models.DateField(null=True)
+    pass

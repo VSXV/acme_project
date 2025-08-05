@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
 
 UserAdmin.fieldsets += (
-    ('Extra Fields', {'fields': ('birthday',)}),
+    ('Extra Fields', {'fields': ()}),
 )
 
 admin.site.register(CustomUser, UserAdmin)
