@@ -66,10 +66,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails' 
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',]
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'pages:homepage'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
