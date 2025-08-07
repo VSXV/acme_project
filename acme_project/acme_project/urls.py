@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import include, path, reverse_lazy
@@ -22,3 +23,9 @@ urlpatterns = [
 ]
 
 handler404 = 'core.views.page_not_found'
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    # Добавить к списку urlpatterns список адресов из приложения debug_toolbar:
+    urlpatterns += (path('__debug__/', include(debug_toolbar.urls)),)
